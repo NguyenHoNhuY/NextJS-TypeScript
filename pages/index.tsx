@@ -14,7 +14,7 @@ const Home: NextPage = () => {
 
 			<main className={styles.main}>
 				<h1 className={styles.title}>
-					Welcome to <a href="https://nextjs.org">Next.js!</a>
+					Welcome to <a href="https://nextjs.org">NextJS App by Nguyen Ho Nhu Y!</a>
 				</h1>
 
 				<p className={styles.description}>
@@ -53,7 +53,7 @@ const Home: NextPage = () => {
 					target="_blank"
 					rel="noopener noreferrer"
 				>
-					Powered by{' '}
+					Powered by
 					<span className={styles.logo}>
 						<Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
 					</span>
