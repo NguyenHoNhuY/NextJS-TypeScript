@@ -1,9 +1,16 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import Image from 'next/image';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
 import styles from '../styles/Home.module.css';
 
 const Home: NextPage = () => {
+	const router = useRouter();
+
+	const handleButtonClick = () => {
+		router.push('/posts/create');
+	};
 	return (
 		<div className={styles.container}>
 			<Head>
@@ -14,12 +21,16 @@ const Home: NextPage = () => {
 
 			<main className={styles.main}>
 				<h1 className={styles.title}>
-					Welcome to <a href="https://nextjs.org">NextJS App by Nguyen Ho Nhu Y!</a>
+					Welcome to <a href="https://nextjs.org">NextJS App by Nguyen Ho Nhu!</a>
 				</h1>
 
 				<p className={styles.description}>
 					Get started by editing <code className={styles.code}>pages/index.tsx</code>
 				</p>
+				{/* <button onClick={handleButtonClick}>Go to post create page</button> */}
+				<Link href="/posts/create">
+					<a>go to create page</a>
+				</Link>
 
 				<div className={styles.grid}>
 					<a href="https://nextjs.org/docs" className={styles.card}>
