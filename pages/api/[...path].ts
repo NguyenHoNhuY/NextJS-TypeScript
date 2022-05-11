@@ -18,7 +18,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
 	//* https://js-post-api.herokuapp.com/api/students
 
 	proxy.web(req, res, {
-		target: process.env.API_URl,
+		target: 'https://js-post-api.herokuapp.com',
 		changeOrigin: true,
 		selfHandleResponse: false,
 	});
