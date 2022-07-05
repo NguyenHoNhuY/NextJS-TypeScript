@@ -1,25 +1,36 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import httpProxy from 'http-proxy';
+import Cookies from 'cookies';
 
 export const config = {
-	api: {
-		bodyParser: false,
-	},
+    api: {
+        bodyParser: false,
+    },
 };
 
 const proxy = httpProxy.createProxyServer();
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse<any>) {
-	//todo don't send cookies to api server
+    //todo doi xu li api o proxy
+    return new Promise((resolve) => {
+        ///todo convert cookies to header authorization
+        const cookies = new Cookies(req, res);
+        const accessToken = cookies.get('access_token');
+        if (accessToken) {
+            req.headers.authorization = `Bearer ${accessToken}`;
+        }
 
-	req.headers.cookie = '';
+        req.headers.cookie = '';
 
-	//* /api/students
-	//* https://js-post-api.herokuapp.com/api/students
+        proxy.web(req, res, {
+            target: process.env.API_URL,
+            changeOrigin: true,
+            selfHandleResponse: false,
+        });
 
-	proxy.web(req, res, {
-		target: process.env.API_URL,
-		changeOrigin: true,
-		selfHandleResponse: false,
-	});
+        //todo bao len server da xu ly xong api
+        proxy.once('proxyRes', () => {
+            resolve(true);
+        });
+    });
 }
